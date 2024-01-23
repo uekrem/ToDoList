@@ -33,11 +33,6 @@ function showTasks() {
 
         var taskDescription = document.createElement('span');
         taskDescription.textContent = task.description;
-        // Tamamlanmışsa üstünü çiz
-        if (task.completed) {
-            listItem.classList.add('completed');
-        }
-
         listItem.appendChild(taskDescription);
 
         listItem.onclick = function() {
@@ -47,7 +42,6 @@ function showTasks() {
         taskList.appendChild(listItem);
     });
 
-    // Silme butonunu ekle
     var deleteButton = document.querySelector('.delete-btn');
     deleteButton.onclick = deleteCompletedTasks;
    
@@ -62,9 +56,7 @@ function toggleTask(index) {
 
 function deleteCompletedTasks() {
     var tasks = getTasksFromLocalStorage();
-    tasks = tasks.filter(function(task) {
-        return !task.completed;
-    });
+    tasks = tasks.filter(task => !task.completed);
     updateTasksInLocalStorage(tasks);
     showTasks();
 }
